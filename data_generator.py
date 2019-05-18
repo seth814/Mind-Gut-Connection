@@ -6,7 +6,39 @@ from tensorflow.keras.utils import to_categorical
 
 
 class DataGenerator(tf.keras.utils.Sequence):
-    # Generates data for Keras
+    '''
+
+    Data generator for Keras model
+    Adapted from: https://stanford.edu/~shervine/blog/keras-how-to-generate-data-on-the-fly
+
+    Parameters
+    ------------
+    paths: list(str or path-like object)
+        locations of each npz sample spaced with total duration
+    targets: list(path-like object)
+        locations of target signals to be reconstructed from mixture
+    mode: str
+        CNN or RCNN
+    td: int
+        number of seconds per sample
+    dt: float
+        time to slice total_duration
+    n_classes: int
+        number of classes
+    input_shape:  CNN: (time, feats, n_channels)
+                 RCNN: (slice, time, feats, n_channels)
+        slice : time feats sliced by delta_time
+        time : step_size per second (10 ms)
+        feats : freq_bins from stft or mfcc
+        n_channels : 1
+    epoch_frac: float
+        percentage of data to train per epoch of total dataset
+    batch_size: 32
+        number of samples per batch
+    suffle: True
+        boolean to shuffle data between epochs
+
+    '''
     def __init__(self, paths, targets, mode, td, dt, n_classes,
                  input_shape, epoch_frac=1.0, batch_size=32, shuffle=True):
         self.paths = paths
@@ -47,7 +79,7 @@ class DataGenerator(tf.keras.utils.Sequence):
 
 
     def __data_generation(self, paths, targets):
-
+        # Generates a batch of data by reading in npz until total duration is met
         if len(self.input_shape) == 3:
             X = np.empty((self.batch_size, self.input_shape[0], self.input_shape[1], 1), dtype=np.float32)
 
@@ -74,7 +106,6 @@ class DataGenerator(tf.keras.utils.Sequence):
             if self.mode == 'CNN':
                 X[i,] = np.expand_dims(x, axis=2)
                 Y[i,] = y
-
 
             elif self.mode == 'RCNN':
                 frames = []

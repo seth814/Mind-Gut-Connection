@@ -3,8 +3,6 @@ from train import train
 
 parser = argparse.ArgumentParser(description='TensorFlow Mind Gut Connection Model')
 
-#parser.add_argument('model_dir', help='output directory to save models & results')
-
 parser.add_argument('--data_root', type=str, default='/home/seth/datasets/gut',\
                     help='directory containing stft and mfcc dir')
 
@@ -23,7 +21,7 @@ parser.add_argument('-dt', '--delta_time', type=float, default=1.0,
 parser.add_argument('-t', '--is_train', type=int, default=1,\
                     help='use 1 to train model')
 
-parser.add_argument('-e', '--epochs', type=int, default=120,\
+parser.add_argument('-e', '--epochs', type=int, default=50,\
                     help='number of training epochs')
 
 args = parser.parse_args()

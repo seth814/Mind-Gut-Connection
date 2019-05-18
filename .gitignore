@@ -1,5 +1,6 @@
 .ipynb_checkpoints
-models/*
 __pycache__
 logs
 test.py
+*.h5
+*.model

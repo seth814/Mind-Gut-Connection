@@ -19,6 +19,7 @@ def train(args):
     paths = []
     labels = []
 
+    # creates lists of paths and labels, which are spaced by total duration
     for sub_dir in os.listdir(path):
         for class_dir in os.listdir(os.path.join(path, sub_dir)):
             cls_path = os.path.join(path, sub_dir, class_dir)
@@ -31,7 +32,7 @@ def train(args):
                 paths.append(os.path.join(cls_path, files[i]))
                 labels.append(cls2int[class_dir])
 
-    # data is of shape (100, 128) or (100, 13)
+    # data is of shape (100, 128) or (100, 13) for 1 second of data
     # (time, feats)
     sample = np.load(os.path.join(cls_path, files[i]))
 
@@ -40,7 +41,6 @@ def train(args):
     if args.model is 'CNN':
         print('Using a total duration of {} seconds per sample\n'.format(args.total_dur))
         input_shape = (sample.shape[0]*args.total_dur, sample.shape[1], 1)
-        print(input_shape)
         model = ConvNet(input_shape=input_shape)
 
     elif args.model is 'RCNN':
