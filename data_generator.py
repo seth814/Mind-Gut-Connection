@@ -15,8 +15,8 @@ class DataGenerator(tf.keras.utils.Sequence):
     ------------
     paths: list(str or path-like object)
         locations of each npz sample spaced with total duration
-    targets: list(path-like object)
-        locations of target signals to be reconstructed from mixture
+    targets: list(int)
+        label encoded activity states
     mode: str
         CNN or RCNN
     td: int
