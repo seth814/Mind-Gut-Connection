@@ -1,6 +1,6 @@
 import os
 import tensorflow as tf
-from tensorflow.keras.callbacks import TensorBoard
+from keras.callbacks import TensorBoard
 from tensorflow.python.eager import context
 
 

@@ -2,10 +2,11 @@ import numpy as np
 import pickle
 import os
 import tensorflow as tf
-from tensorflow.keras.utils import to_categorical
+from keras.utils import to_categorical
+import keras
 
 
-class DataGenerator(tf.keras.utils.Sequence):
+class DataGenerator(keras.utils.Sequence):
     '''
 
     Data generator for Keras model
@@ -31,8 +32,6 @@ class DataGenerator(tf.keras.utils.Sequence):
         time : step_size per second (10 ms)
         feats : freq_bins from stft or mfcc
         n_channels : 1
-    epoch_frac: float
-        percentage of data to train per epoch of total dataset
     batch_size: 32
         number of samples per batch
     suffle: True
@@ -40,7 +39,7 @@ class DataGenerator(tf.keras.utils.Sequence):
 
     '''
     def __init__(self, paths, targets, mode, td, dt, n_classes,
-                 input_shape, epoch_frac=1.0, batch_size=32, shuffle=True):
+                 input_shape, batch_size=32, shuffle=True):
         self.paths = paths
         self.targets = targets
         self.mode = mode
@@ -48,7 +47,6 @@ class DataGenerator(tf.keras.utils.Sequence):
         self.dt = dt
         self.n_classes = n_classes
         self.input_shape = input_shape
-        self.epoch_frac = epoch_frac
         self.batch_size = batch_size
         self.shuffle = shuffle
         self.on_epoch_end()
@@ -56,7 +54,7 @@ class DataGenerator(tf.keras.utils.Sequence):
 
     def __len__(self):
         # Denotes the number of batches per epoch
-        return int(np.floor(len(self.paths) / self.batch_size)*self.epoch_frac)
+        return int(np.floor(len(self.paths) / self.batch_size))
 
 
     def __getitem__(self, index):

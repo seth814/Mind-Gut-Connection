@@ -1,8 +1,8 @@
-from tensorflow.keras import layers
-from tensorflow.keras.models import Model, Sequential
-from tensorflow.keras.utils import to_categorical
+from keras import layers
+from keras.models import Model, Sequential
+from keras.utils import to_categorical
 import tensorflow as tf
-from tensorflow.keras.optimizers import Adam
+from keras.optimizers import Adam
 
 
 def log10(x):
@@ -52,7 +52,6 @@ def ConvNet(input_shape, base=3):
     model.compile(loss='categorical_crossentropy',
                   optimizer=Adam(1e-4),
                   metrics=['accuracy'])
-    model.summary()
 
     return model
 
@@ -92,6 +91,5 @@ def Recurrent2DConvNet(input_shape, base=3):
     model.compile(loss='categorical_crossentropy',
                   optimizer=Adam(1e-4),
                   metrics=['accuracy'])
-    model.summary()
 
     return model

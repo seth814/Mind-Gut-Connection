@@ -1,5 +1,6 @@
 import argparse
 from train import train
+from cross_validation import train_cv
 
 parser = argparse.ArgumentParser(description='TensorFlow Mind Gut Connection Model')
 
@@ -21,7 +22,7 @@ parser.add_argument('-dt', '--delta_time', type=float, default=1.0,
 parser.add_argument('-t', '--is_train', type=int, default=1,\
                     help='use 1 to train model')
 
-parser.add_argument('-e', '--epochs', type=int, default=50,\
+parser.add_argument('-e', '--epochs', type=int, default=10,\
                     help='number of training epochs')
 
 args = parser.parse_args()
