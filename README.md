@@ -56,7 +56,9 @@ Delta time will slice the total duration into time intervals for the RCNN. (igno
 
 `python main.py`
 
-Trains the model using 25% percent of the training set per epoch. Shuffles each epoch. (9/1 train test split)
+Shuffles each epoch. (9/1 train test split)
+
+Swap train(args) with train_cv(args) to switch to cross validation. n_splits (10) is set in cross_validation.py
 
 **Note** Check the output size of each convolution block if you are making delta time smaller.
 Comment out blocks if output shape into the LSTM to too small.
