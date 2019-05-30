@@ -41,6 +41,11 @@ Features are saved as npz files.
 Looks at the min and max values for each sample in either stft or mfcc directory.
 Considers log10(features)+6 as a lambda function transform as input to the neural network for a normal distribution.
 
+##### Evaluate Subjects
+
+Predicts accuracies for each subject in either stft or mfcc directories.
+Also has some results from cross validation on both ordered and unordered subjects.
+
 ## Running the models
 
 Two models are implemented. Convolutional Neural Net (CNN). Recurrent Convolutional Neural Net. (RCNN)
